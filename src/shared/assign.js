@@ -1,3 +1,3 @@
-const { assign } = Object
+const { assign } = Object;
 
-export default assign
+export default assign;

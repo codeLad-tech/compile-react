@@ -1,8 +1,8 @@
-import logger from "shared/logger";
+import logger, { indent } from "shared/logger";
 import { HostComponent, HostRoot, HostText } from "./ReactWorkTag";
 import { processUpdateQueue } from "./ReactFiberClassUpdateQueue";
 import { mountChildFibers, reconcileChildFibers } from "./ReactChildFiber";
-import { shouldSetTextContent } from "react-dom-bindings/src/ReactDOMHostConfig";
+import { shouldSetTextContent } from "react-dom-bindings/src/client/ReactDOMHostConfig";
 /**
  * 根据新的虚拟dom生成新的fiber链表
  * @param {*} current 老的父fiber
@@ -62,7 +62,8 @@ function updateHostComponent(current, workInProgress) {
  * @returns
  */
 export function beginWork(current, workInProgress) {
-  logger("beginWork", workInProgress);
+  logger(" ".repeat(indent.number) + "beginWork", workInProgress);
+  indent.number += 2;
   switch (workInProgress.tag) {
     case HostRoot:
       return updateHostRoot(current, workInProgress);

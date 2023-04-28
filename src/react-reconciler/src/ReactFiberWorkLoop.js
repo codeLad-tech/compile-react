@@ -26,6 +26,7 @@ function ensureRootIsScheduled(root) {
 function performConcurrentWorkOnRoot(root) {
   //初次渲染的时候 以同步的方式渲染根节点
   renderRootSync(root);
+  console.log(root);
 }
 
 function prepareFreshStack(root) {
@@ -52,6 +53,7 @@ function performUniOfWork(uniOfWork) {
   // 获取新的fiber对云高的老fiber
   const current = uniOfWork.alternate;
   // 完成当前fiber的子fiber链表构建
+
   const next = beginWork(current, uniOfWork);
   uniOfWork.memoizedProps = uniOfWork.pendingProps;
   if (next === null) {
