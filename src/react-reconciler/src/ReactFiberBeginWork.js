@@ -50,7 +50,7 @@ function updateHostComponent(current, workInProgress) {
   if (isDirecTextChild) {
     nextChildren = null;
   }
-  reconcileChildFibers(current, workInProgress, nextChildren);
+  reconcileChildren(current, workInProgress, nextChildren);
 
   return workInProgress.child;
 }
@@ -63,7 +63,6 @@ function updateHostComponent(current, workInProgress) {
  */
 export function beginWork(current, workInProgress) {
   logger("beginWork", workInProgress);
-
   switch (workInProgress.tag) {
     case HostRoot:
       return updateHostRoot(current, workInProgress);

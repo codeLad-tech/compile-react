@@ -42,7 +42,7 @@ function createChildReconciler(shouldTrackSideEffects) {
     if (typeof newChild === "object" && newChild !== null) {
       switch (newChild.$$typeof) {
         case REACT_ELEMENT_TYPE: {
-          const created = createFiberFromElement(`${newChild}`);
+          const created = createFiberFromElement(newChild);
           created.return = returnFiber;
           return created;
         }
@@ -77,16 +77,18 @@ function createChildReconciler(shouldTrackSideEffects) {
       const newFiber = createChild(returnFiber, newChild[newIndex]);
       if (newFiber === null) continue;
       placeChild(newFiber, newIndex);
-
       // 如果previousNerFiber为null 说明这是第一个fiber
       if (previousNerFiber === null) {
         resultingFirstChild = newFiber; // 这个newFiber就是大儿子
       } else {
         // 否则说明不是大儿子，就把这个newFiber添加到sibling上
-        previousNerFiber.sibling = newFiber;
+        resultingFirstChild.sibling = newFiber;
+        // previousNerFiber.sibling = newFiber; // 错误
       }
       previousNerFiber = newChild;
     }
+
+    return resultingFirstChild;
   }
 
   /**
@@ -113,10 +115,10 @@ function createChildReconciler(shouldTrackSideEffects) {
     }
 
     // nextChild [hello 文本节点， span虚拟dom元素]
-    debugger;
     if (isArray(newChild)) {
       return reconcileChildrenArray(returnFiber, currentFirstFiber, newChild);
     }
+    return null;
   };
 }
 

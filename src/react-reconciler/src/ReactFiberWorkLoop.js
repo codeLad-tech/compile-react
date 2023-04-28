@@ -54,7 +54,6 @@ function performUniOfWork(uniOfWork) {
   // 完成当前fiber的子fiber链表构建
   const next = beginWork(current, uniOfWork);
   uniOfWork.memoizedProps = uniOfWork.pendingProps;
-
   if (next === null) {
     // 没有子节点，已经完成了
     completeUnitOfWork(uniOfWork);
@@ -69,6 +68,7 @@ function completeUnitOfWork(uniOfWork) {
   do {
     const current = completedWork.alternate;
     const returnFiber = completedWork.return;
+
     // 执行此fiber的完成工作，如果是原生组件的话就是创建真实dom
     completeWork(current, completedWork);
     // 如果有弟弟，就构建弟弟对应的fiber链表

@@ -9,7 +9,7 @@ export default function (prefix, workInProgress) {
   let tagName = ReactWorkTagsMap.get(tagValue);
 
   let str = ` ${tagName}`;
-  if (tagName === "hostComponent") {
+  if (tagName === "HostComponent") {
     str += ` ${workInProgress.type}`;
   } else if (tagName === "HostText") {
     str += ` ${workInProgress.pendingProps}`;
